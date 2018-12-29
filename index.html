@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+    <style>
+body{
+    height:900px;
+    width:1200px;
+}
+        #left{
+            width:20%;
+            height:80%;
+            border:1px solid red;
+            margin:10px;
+            float:left;
+        }
+        #middle{
+            width:60%;
+            height:80%;
+            border:1px solid red;
+            margin:10px;
+            float:left;
+        }
+        #right{
+            width:10%;
+            height:80%;
+            border:1px solid red;
+            margin:10px;
+            float:left;
+        }
+        button{
+            text-align:left;
+        }
+
+    </style>
+</head>
+<body>
+	<div id="left">
+    <form action="show.php" method="get">
+        <?php 
+        $dsn = "mysql:host=localhost;dbname=blog";
+        $con = new PDO($dsn,"root","xyzzy");
+        $sql = "select * from tmp order by id desc limit 30";
+        $stmt = $con->prepare($sql);
+        $stmt->execute();
+        $res = $stmt->fetchAll();
+        for($i=0;$i<count($res);$i++){
+        ?>
+            <a href="
+                <?php  echo $res[$i][1];?>
+            ">
+            <span>
+                <?php    echo $res[$i][2]; ?>
+            </span>
+            </a></br>
+        <?php  }  ?>
+    </form>
+    </div>
+	<div id="middle">
+        <textarea rows="45" cols="90">
+        <?php 
+        $dsn = "mysql:host=localhost;dbname=blog";
+        $con = new PDO($dsn,"root","xyzzy");
+        $sql = "select * from tmp order by id desc limit 30";
+        $stmt = $con->prepare($sql);
+        $stmt->execute();
+        $res = $stmt->fetchAll();
+        echo $res[0][3];
+        ?>
+        </textarea>    
+    </div>
+	<div id="right"></div>
+    <div id="search"></div>
+    <script src="callContent.js">
+    </script>
+</body>
+</html>

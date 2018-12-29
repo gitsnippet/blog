@@ -1,0 +1,24 @@
+create table tmp (select post_title,post_content from wp_posts);
+
+alter table tmp add link varchar(30) NOT Null;
+UPDATE tmp SET link=concat('http://127.0.0.1/blog/?id=',id); 
+alter table tmp modify link varchar(30) after id;
+
+
+apache2的设置
+
+cat /etc/apache2/apache2.conf
+
+<Directory /var/www/html/blog>
+    Options Indexes FollowSymLinks
+    AllowOverride None
+    Require all granted
+    DirectoryIndex  landing.html 
+</Directory>
+
+
+create table tmp (select post_title,post_content from wp_posts);
+mysqldump -u root -pxyzzy wpdatabase tmp  > /tmp/content.sql
+mysql -u root -p
+create database blog
+source  /tmp/content.sql;
