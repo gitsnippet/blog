@@ -1,23 +1,30 @@
-function new(){
 
+function fnew(){
+    var xmlHttp = new XMLHttpRequest;
+    var title = document.getElementById("title");
+    var content = document.getElementById("content");
+    title.setAttribute("myid","-1");
+    title.innerHTML = "";
+    content.innerHTML = "";
 }
 
-ob_new = document.getElementById();
-ob_new.addEventListener("click",new);
-
-
-function delete(){
-
+function change(event){
+    var flag = event.target;
+    switch(flag.id){
+        case "sticky":
+            fsticky();     
+            break;
+        case "new":
+            fnew();
+            break;
+        case "delete":
+            fdelete();
+            break;
+        case "publish":
+            fpublish();
+            break;
+    }
 }
 
-ob_delete = document.getElementById();
-ob_delete.addEventListener("click",delete);
-
-
-
-function publish(){
-
-}
-
-ob_publish = document.getElementById();
-ob_publish.addEventListener("click",publish);
+ob_change = document.getElementById("right");
+ob_change.addEventListener("click",change);
