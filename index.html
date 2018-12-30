@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <title></title>
     <style>
+        *{
+            text-align:left;
+            font-size:14px;
+            font-family:"DejaVu Sans Mono" !important;
+        }
+        div{
+            border:1px solid red;
+        }
         #main{
             width:90%;
             height:900px;
@@ -35,6 +43,7 @@
 </head>
 <body>
     <div id="main">
+
     <div id="left">
         <?php 
         $dsn = "mysql:host=localhost;dbname=blog";
@@ -52,7 +61,14 @@
         <?php  }  ?>
     </div>
     <div id="middle">
-        <div id="title">
+        <div id="title" myid="<?php
+        $dsn = "mysql:host=localhost;dbname=blog";
+        $con = new PDO($dsn,"root","xyzzy");
+        $sql = "select * from tmp order by id desc limit 30";
+        $stmt = $con->prepare($sql);
+        $stmt->execute();
+        $res = $stmt->fetchAll();
+        echo $res[0][0];?>">
         <?php 
         $dsn = "mysql:host=localhost;dbname=blog";
         $con = new PDO($dsn,"root","xyzzy");
@@ -63,7 +79,7 @@
         echo $res[0][2];
         ?>
         </div>
-        <textarea rows="45" cols="140" id="result">
+        <textarea cols="140" rows="60" id="content">
         <?php 
         $dsn = "mysql:host=localhost;dbname=blog";
         $con = new PDO($dsn,"root","xyzzy");
@@ -76,14 +92,12 @@
         </textarea>    
     </div>
     <div id="right">
-        <div id="edit">edit</div>
-        <div id="new">new</div>
+        <div id="edit">new</div>
         <div id="delete">delete</div>
         <div id="publish">publish</div>
     </div>
     <div id="search"></div>
     </div>
-    <script src="callContent.js">
-    </script>
+    <script src="callContent.js"></script>
 </body>
 </html>

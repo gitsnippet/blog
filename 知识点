@@ -1,4 +1,8 @@
 create table tmp (select post_title,post_content from wp_posts);
+alter table goods drop id;
+alter table goods auto_increment=1;
+alter table goods add id int(4) unsigned NOT Null auto_increment primary key;
+alter table goods modify id int(4) unsigned NOT Null auto_increment  first;
 
 alter table tmp add link varchar(30) NOT Null;
 UPDATE tmp SET link=concat('http://127.0.0.1/blog/?id=',id); 
@@ -22,3 +26,32 @@ mysqldump -u root -pxyzzy wpdatabase tmp  > /tmp/content.sql
 mysql -u root -p
 create database blog
 source  /tmp/content.sql;
+
+wordpress 的post_status
+publish private sticky  auto-draft inherit
+all=publish+private+sticky
+MariaDB [wpdatabase]> select count(*) from wp_posts where post_type="post";
++----------+
+| count(*) |
++----------+
+|     1644 |
++----------+
+1 row in set (0.00 sec)
+
+MariaDB [wpdatabase]> select count(*) from wp_posts where post_type="post" and post_status="publish";
++----------+
+| count(*) |
++----------+
+|     1565 |
++----------+
+1 row in set (0.01 sec)
+
+MariaDB [wpdatabase]> select count(*) from wp_posts where post_type="post" and post_status="private";
++----------+
+| count(*) |
++----------+
+|       79 |
++----------+
+1 row in set (0.00 sec)
+
+create table tmp (select post_title,post_content from wp_posts where post_type="post");
