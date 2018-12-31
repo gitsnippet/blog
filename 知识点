@@ -1,12 +1,12 @@
-create table tmp (select post_title as title ,post_content as content,post_status as status from wp_posts where post_type="post") ;
-alter table tmp drop id;
-alter table tmp auto_increment=1;
-alter table tmp add id int(4) unsigned NOT Null auto_increment primary key;
-alter table tmp modify id int(4) unsigned NOT Null auto_increment  first;
-bash中 mysqldump -u root -pxyzzy wpdatabase tmp  > /tmp/content.sql
+create table post (select post_title as title ,post_content as content,post_status as status from wp_posts where post_type="post") ;
+alter table post drop id;
+alter table post auto_increment=1;
+alter table post add id int(4) unsigned NOT Null auto_increment primary key;
+alter table post modify id int(4) unsigned NOT Null auto_increment  first;
+bash中 mysqldump -u root -pxyzzy wpdatabase post  > /tmp/post.sql
 mysql -u root -p
 create database blog
-source  /tmp/content.sql;
+source  /tmp/post.sql;
 
 如何放字段的位置
 alter table tmp modify link varchar(30) after id;

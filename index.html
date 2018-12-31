@@ -3,50 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <style>
-        *{
-            text-align:left;
-            font-size:14px;
-            font-family:"DejaVu Sans Mono" !important;
-        }
-        div{
-            border:1px solid red;
-        }
-        #main{
-            width:90%;
-            height:900px;
-            border:1px solid red;
-        }
-        #left{
-            width:20%;
-            height:80%;
-            border:1px solid red;
-            margin:10px;
-            float:left;
-        }
-        #middle{
-            width:60%;
-            height:80%;
-            border:1px solid red;
-            margin:10px;
-            float:left;
-        }
-        #title{
-            height:40px;
-        }
-        #right{
-            width:10%;
-            height:80%;
-            border:1px solid red;
-            margin:10px;
-            float:left;
-        }
-
-    </style>
+    <link rel="stylesheet" href="style.css" style="text/css">
 </head>
 <body>
     <div id="main">
-
     <div id="left">
         <?php 
         $dsn = "mysql:host=localhost;dbname=blog";
@@ -99,6 +59,7 @@
         <div id="delete">delete</div>
         <div id="publish">publish</div>
         <div id="sticky">sticky</div>
+        <div id="trash">trash</div>
     </div>
     <div id="search"></div>
     </div>
