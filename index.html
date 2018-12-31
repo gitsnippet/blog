@@ -57,9 +57,9 @@
         $res = $stmt->fetchAll();
         for($i=0;$i<count($res);$i++){
         ?>
-            <button name="<?php  echo $res[$i][0];?>"
-                    value="<?php    echo $res[$i][2]; ?>">
-                    <?php    echo $res[$i][2]; ?>
+            <button name="<?php  echo $res[$i]['id'];?>"
+                    value="<?php    echo $res[$i]['title']; ?>">
+                    <?php    echo $res[$i]['title']; ?>
             </button></br>
         <?php  }  ?>
     </div>
@@ -71,7 +71,7 @@
         $stmt = $con->prepare($sql);
         $stmt->execute();
         $res = $stmt->fetchAll();
-        echo $res[0][0];?>">
+        echo $res[0]['id'];?>">
         <?php 
         $dsn = "mysql:host=localhost;dbname=blog";
         $con = new PDO($dsn,"root","xyzzy");
@@ -79,31 +79,30 @@
         $stmt = $con->prepare($sql);
         $stmt->execute();
         $res = $stmt->fetchAll();
-        echo $res[0][2];
+        echo $res[0]['title'];
         ?>
         </div>
-        <textarea cols="140" rows="60" id="content">
-        <?php 
+        <textarea cols="120" rows="60" id="content"><?php 
         $dsn = "mysql:host=localhost;dbname=blog";
         $con = new PDO($dsn,"root","xyzzy");
         $sql = "select * from tmp order by id desc limit 30";
         $stmt = $con->prepare($sql);
         $stmt->execute();
         $res = $stmt->fetchAll();
-        echo $res[0][3];
+        echo trim($res[0]['content']);
         ?>
         </textarea>    
     </div>
     <div id="right">
-        <div id="sticky">sticky</div>
         <div id="new">new</div>
+        <div id="edit">edit</div>
         <div id="delete">delete</div>
         <div id="publish">publish</div>
+        <div id="sticky">sticky</div>
     </div>
     <div id="search"></div>
     </div>
     <script src="callContent.js"></script>
     <script src="change.js"></script>
-
 </body>
 </html>

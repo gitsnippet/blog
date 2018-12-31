@@ -6,8 +6,8 @@ $sql = "select * from tmp where id = $id ";
 $stmt = $con->prepare($sql);
 $stmt->execute();
 $res = $stmt->fetchAll();
-$title = $res[0][2];
-$content = $res[0][3];
+$title = $res[0]['title'];
+$content = $res[0]['content'];
 $result = array("id" => $id,"title" => $title, "content" => $content);
 echo json_encode($result);
 ?>

@@ -1,11 +1,14 @@
-create table tmp (select post_title,post_content from wp_posts);
-alter table goods drop id;
-alter table goods auto_increment=1;
-alter table goods add id int(4) unsigned NOT Null auto_increment primary key;
-alter table goods modify id int(4) unsigned NOT Null auto_increment  first;
+create table tmp (select post_title as title ,post_content as content,post_status as status from wp_posts where post_type="post") ;
+alter table tmp drop id;
+alter table tmp auto_increment=1;
+alter table tmp add id int(4) unsigned NOT Null auto_increment primary key;
+alter table tmp modify id int(4) unsigned NOT Null auto_increment  first;
+bash中 mysqldump -u root -pxyzzy wpdatabase tmp  > /tmp/content.sql
+mysql -u root -p
+create database blog
+source  /tmp/content.sql;
 
-alter table tmp add link varchar(30) NOT Null;
-UPDATE tmp SET link=concat('http://127.0.0.1/blog/?id=',id); 
+如何放字段的位置
 alter table tmp modify link varchar(30) after id;
 
 
@@ -21,11 +24,6 @@ cat /etc/apache2/apache2.conf
 </Directory>
 
 
-create table tmp (select post_title,post_content from wp_posts);
-mysqldump -u root -pxyzzy wpdatabase tmp  > /tmp/content.sql
-mysql -u root -p
-create database blog
-source  /tmp/content.sql;
 
 wordpress 的post_status
 publish private sticky  auto-draft inherit
