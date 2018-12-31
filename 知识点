@@ -8,6 +8,19 @@ mysql -u root -p
 create database blog
 source  /tmp/post.sql;
 
+
+cd /var/www/html/blog
+
+sudo mkdir smarty
+sudo mkdir smarty/templates
+sudo mkdir smarty/templates_c
+sudo mkdir smarty/cache
+sudo mkdir smarty/configs
+sudo chown www-data.www-data smarty/templates_c
+sudo chown www-data.www-data smarty/cache
+sudo chmod 775 smarty/templates_c
+sudo chmod 775 smarty/cache
+
 如何放字段的位置
 alter table tmp modify link varchar(30) after id;
 
