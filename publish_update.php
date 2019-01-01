@@ -1,4 +1,5 @@
 <?php
+$id = trim($_POST["id"]);
 $title = trim($_POST["title"]);
 $content = trim($_POST["content"]);
 
@@ -9,20 +10,11 @@ $title = $con->quote($title);
 $content = $con->quote($content);
 
 try{
-    $sql = "insert into post (`title`,`content`) values($title,$content)";
+    $sql = "update post set title=$title,content=$content,status='publish' where id=$id";
     $stmt = $con->prepare($sql);
     $stmt->execute();
 }catch(PDOException  $e)
 {
     echo $e->getMessage();
 }
-
-$sql_id = "select max(`id`) from post";
-$stmt = $con->prepare($sql_id);
-$stmt->execute();
-$id = $stmt->fetchAll()[0][0];
-
-echo $id;
 ?>
-
-

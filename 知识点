@@ -66,3 +66,21 @@ MariaDB [wpdatabase]> select count(*) from wp_posts where post_type="post" and p
 1 row in set (0.00 sec)
 
 create table tmp (select post_title,post_content from wp_posts where post_type="post");
+
+在删除子元素的时候，报错：
+.parentNode is null
+
+修改代码顺序后，错误消失
+container.setAttribute("myid",id);
+input.parentNode.removeChild(input);        
+container.innerHTML = title;
+修改成
+input.parentNode.removeChild(input);        
+container.setAttribute("myid",id);
+container.innerHTML = title;
+
+父元素发生变动后，子元素无法识别父元素了，改动后的父元素和改动之前不一样。
+
+
+
+

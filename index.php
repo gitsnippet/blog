@@ -9,11 +9,10 @@ $smarty->setConfigDir('/var/www/html/blog/smarty/configs');
 
 $dsn = "mysql:host=localhost;dbname=blog";
 $con = new PDO($dsn,"root","xyzzy");
-$sql = "select * from post order by id desc limit 30";
+$sql = "select * from post where status != 'trash' order by id desc limit 30";
 $stmt = $con->prepare($sql);
 $stmt->execute();
 $res = $stmt->fetchAll();
-
 
 $smarty->assign('results', $res);
 $smarty->display('index.tpl');

@@ -18,7 +18,7 @@
         <div id="title" myid={$results[0].id}>
              {$results[0].title}
         </div>
-        <textarea cols="120" rows="60" id="content">
+        <textarea cols="120" rows="60" id="content" readonly="readonly">
              {$results[0].content}
         </textarea>    
     </div>

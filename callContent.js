@@ -1,12 +1,14 @@
-function callContent(event){
+function callContent(event)
+{
     var xmlHttp = new XMLHttpRequest;
-    var eventTarget = event.target;
-    var title_id = eventTarget.name;
+    var title_id = event.target.getAttribute("myid");
     url = "show.php" + "/?id=" + title_id;
     xmlHttp.open("get", url ,true); 
     xmlHttp.send(); 
-    xmlHttp.onreadystatechange =  function(){
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+    xmlHttp.onreadystatechange =  function()
+    {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+        {
             result = xmlHttp.responseText;
             var title = JSON.parse(result)["title"];
             var content =  JSON.parse(result)["content"];
@@ -22,5 +24,3 @@ function callContent(event){
 
 ob = document.getElementById("left");
 ob.addEventListener("click", callContent, true);
-
-

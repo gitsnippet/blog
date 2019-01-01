@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2018-12-31 18:29:46
+/* Smarty version 3.1.34-dev-7, created on 2018-12-31 21:01:07
   from '/var/www/html/blog/index.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5c29ef9a8b0af3_36142077',
+  'unifunc' => 'content_5c2a1313439b19_78041853',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'f33ce951ee695e54687d28d1c579ae4c06e66dd3' => 
     array (
       0 => '/var/www/html/blog/index.tpl',
-      1 => 1546252182,
+      1 => 1546261259,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5c29ef9a8b0af3_36142077 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5c2a1313439b19_78041853 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,7 +52,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
              <?php echo $_smarty_tpl->tpl_vars['results']->value[0]['title'];?>
 
         </div>
-        <textarea cols="120" rows="60" id="content">
+        <textarea cols="120" rows="60" id="content" readonly="readonly">
              <?php echo $_smarty_tpl->tpl_vars['results']->value[0]['content'];?>
 
         </textarea>    

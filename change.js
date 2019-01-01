@@ -1,5 +1,5 @@
-
-function fnew(){
+function fnew()
+{
     var xmlHttp = new XMLHttpRequest;
     var title = document.getElementById("title");
     var content = document.getElementById("content");
@@ -13,37 +13,69 @@ function fnew(){
     content.value = "";
 }
 
-function fpublish(){
+function fedit()
+{
+    var title = document.getElementById("title");
+    title_content = title.innerHTML;
+    var t_id =  title.getAttribute("myid");
+  　var input = document.createElement("input");
+    input.setAttribute("id","input_id");
+　  input.setAttribute("myid",t_id);
+　  input.setAttribute("type","text");
+    input.style.cssText='width:100%;height:100%;box-sizing: border-box;';
+    input.value = title_content;
+    title.innerHTML = "";
+　　title.appendChild(input);
+}
+
+
+function fpublish()
+{
+    var container = document.getElementById("title");
     var input = document.getElementById("input_id");
     var title = input.value;
-    if(title == ""){
+    if(title == "")
+    {
         alert("title can not be empty");
         return false;
     }
     var content = document.getElementById("content").value;
     var flag = input.getAttribute("myid");
-    if(flag == "-1"){
+    if(flag == "-1")
+    {
         var xmlHttp = new XMLHttpRequest;
         xmlHttp.open("post", "publish_insert.php" ,true); 
         xmlHttp.setRequestHeader("content-type","application/x-www-form-urlencoded");
         var info = "title=" + title + "&content=" + content;
         xmlHttp.send(info); 
-        xmlHttp.onreadystatechange =  function(){
-            if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+        xmlHttp.onreadystatechange =  function()
+        {
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            {
                 var id = xmlHttp.responseText;
-                var container = document.getElementById("title");
-                container.setAttribute("myid","id");
+                container.removeChild(input);        
+                container.setAttribute("myid",id);
                 container.innerHTML = title;
-                input.parentNode.removeChild(input);        
+                window.location.reload();
             }
         } 
     }
-    if(flag == "edit"){
+    if(flag != "-1"){
+        var xmlHttp = new XMLHttpRequest;
         xmlHttp.open("post", "publish_update.php" ,true); 
         xmlHttp.setRequestHeader("content-type","application/x-www-form-urlencoded");
-        var id = "";
-        var info = "";
+        var id = flag;
+        var info = "id=" + id + "&title=" + title + "&content=" + content;
         xmlHttp.send(info);
+        xmlHttp.onreadystatechange =  function()
+        {
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            {
+                container.removeChild(input);        
+                container.innerHTML = title;
+                window.location.reload();
+            }
+        } 
     }
 }
 
@@ -51,7 +83,11 @@ function fdelete()
 {
     var id = document.getElementById("title").getAttribute("myid");
     var xmlHttp = new XMLHttpRequest;
-    alert(id);
+    var msg = "您真的确定要删除吗？\n\n请确认！"; 
+    if (confirm(msg)!=true)
+    { 
+        return false; 
+    } 
     xmlHttp.open("post", "delete.php" ,true); 
     xmlHttp.setRequestHeader("content-type","application/x-www-form-urlencoded");
     var info = "id=" + id;
@@ -60,7 +96,7 @@ function fdelete()
     {
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
         {
-            console.log("ok");
+            console.log(xmlHttp.responseText);
             window.location.reload();
         }
     }
@@ -75,17 +111,17 @@ function change(event){
         case "edit":
             fedit();     
             break;
-        case "drop":
-            fdrop();     
-            break;
-        case "publish":
-            fpublish(flag.id);
-            break;
         case "delete":
             fdelete();
             break;
+        case "publish":
+            fpublish();
+            break;
         case "sticky":
             fsticky();     
+            break;
+        case "trash":
+            ftrash();     
             break;
     }
 }
